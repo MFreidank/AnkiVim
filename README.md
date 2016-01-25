@@ -40,7 +40,10 @@ Supports:
 Working on:
 -> (easy) support for media files
 
-=> actually easy, all we need is: <img = src PATHTOFILE />
+=> actually easy, all we need is: 
+''' text
+<img = src PATHTOFILE />
+'''
 
 Of course, we don't want to type this, so the user may just type:
 
