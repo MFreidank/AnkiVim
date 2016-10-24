@@ -38,7 +38,6 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 import sys
 import optparse
 import os
-sys.path.append(os.path.abspath("."))
 import createCard
 
 

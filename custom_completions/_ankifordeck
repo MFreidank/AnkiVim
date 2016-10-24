@@ -1,0 +1,3 @@
+#compdef ankifordeck
+
+_arguments "1: :($(ls -1 ~/anki-vim/decks))"

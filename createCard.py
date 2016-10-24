@@ -6,14 +6,14 @@ import sys
 import tempfile
 import os
 from subprocess import call
-delimiter_header = '%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%'
+delim_header = '%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%'
 
 
 def drawFrame(content):
     center = '%\t\t\t' + content + '\t\t'
-    delimiter_border = '\n%\t\t\t\t\t\t%\n%\t\t\t\t\t\t%\n' + center
-    +'%\n%\t\t\t\t\t\t%' + '\n%\t\t\t\t\t\t%\n%\t\t\t\t\t\t%\n'
-    return delimiter_header + delimiter_border + delimiter_header
+    delim_border = "{0}{1}{2}{0}".format('\n%\t\t\t\t\t\t%\n%\t\t\t\t\t\t%\n',
+                                         center, '%\n%\t\t\t\t\t\t%')
+    return "{0}{1}{0}".format(delim_header, delim_border)
 
 
 def getQA(contents_file):
@@ -26,9 +26,9 @@ def getQA(contents_file):
         if line[0] == '%':
             header_lines += 1
         elif line[0] != '%' and 15 > header_lines > 0:
-            question += line.replace('\n', '')
+            question += line.replace('\n', "&nbsp;<div><br /></div>")
         elif line[0] != '%' and header_lines > 8:
-            answer += line.replace('\n', '')
+            answer += line.replace('\n', "&nbsp;<div><br /></div>")
     if header_lines < 8:
         raise ValueError("""You deleted header lines! The FRONT and BACK
         markers must be kept intact, otherwise parsing fails.""")
@@ -39,8 +39,8 @@ def getQA(contents_file):
 def createCard(deckpath):
     if not os.path.exists(deckpath):
         call(['mkdir', deckpath])
-    qa_string = drawFrame('QUESTION') + '\n \n \n' + drawFrame('ANSWER\t')
-    + '\n\n\n'
+    qa_string = "{0}{1}{2}{1}".format(drawFrame('QUESTION'), '\n \n \n',
+                                      drawFrame('ANSWER\t'))
     with tempfile.NamedTemporaryFile(suffix='.anki_vim') as temp_file:
         temp_file.write(qa_string)
         temp_file.flush()
@@ -65,7 +65,7 @@ def createCard(deckpath):
 
 def main():
     if len(sys.argv) != 2:
-        print 'USAGE: python create-card.py deckname[STRING]'
+        print('USAGE: python create-card.py deckname[STRING]')
         exit(-1)
     deck = sys.argv[1]
     deckpath = os.path.abspath('./decks') + '/' + deck
