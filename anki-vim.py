@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 
 """
-Using VIM to generate textfiles directly importable to anki as anki cards.
+Using VIM to generate textfiles which are directly anki-importable.
 
 Copyright (C) 2016 Moritz Freidank
 All rights reserved.
@@ -60,12 +60,14 @@ def main():
     if len(sys.argv) == 1:
             parser.print_help()
             return 1
+
     deck = options.deck
     deckpath = os.path.abspath("./decks")+"/"+deck
-    contentAdded = True
-    while contentAdded:
+
+    content_added = True
+    while content_added:
         # If a card is closed without content or changes, stop
-        contentAdded = createCard.createCard(deckpath)
+        content_added = createCard.createCard(deckpath)
 
 if __name__ == '__main__':
     main()
