@@ -55,7 +55,7 @@ def has_no_user_input(filename, header):
         return contents_file.read() == header
 
 
-def createCard(deckpath):
+def create_card(deckpath):
     if not os.path.exists(deckpath):
         call(['mkdir', "-p", deckpath])
     headers = "{0}{1}{2}{1}".format(draw_frame('QUESTION'), '\n \n \n',

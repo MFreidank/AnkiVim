@@ -67,7 +67,7 @@ def main():
     content_added = True
     while content_added:
         # If a card is closed without content or changes, stop
-        content_added = createCard.createCard(deckpath)
+        content_added = create_card.create_card(deckpath)
 
 if __name__ == '__main__':
     main()
