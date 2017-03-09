@@ -42,7 +42,9 @@ import create_card
 
 
 def main():
-    usage = """anki-vim.py [options] """
+    usage = """anki-vim.py [options]
+
+Using VIM to generate textfiles which are directly anki-importable."""
 
     fmt = optparse.IndentedHelpFormatter(max_help_position=50, width=100)
     parser = optparse.OptionParser(usage=usage, formatter=fmt)
