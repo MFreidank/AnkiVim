@@ -5,7 +5,6 @@ extends tex
 
 priority -50
 
-
 snippet la "[latex]"
 [latex]
 ${1}
@@ -15,4 +14,8 @@ endsnippet
 snippet img "image-path"
 <img = src ${1:/tmp/}$0 />
 $2
+endsnippet
+
+snippet "c([c\d]){1}" "{{c1::Cloze}}" br
+{{c`!p snip.rv = match.group(1) if match.group(1) != 'c' else "1"`::${1:Cloze}}}
 endsnippet
