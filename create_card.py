@@ -70,7 +70,7 @@ def create_card(deckpath):
         # Call vim, set the cursor below the "FRONT" header,
         # allow snippets for our new filetype, set the syntax highlighting
         # so that it supports latex highlighting.
-        pattern = r'/\v\%\n\zs^([^\%]*|[^\%]{1}.*)$'
+        pattern = r'/\v\%\n\zs(^$|^[^\%]{1}.*$)'
         call(['vim', '-c {0}'.format(pattern),
               '-c set filetype=anki_vim',
               '-c set syntax=tex',
