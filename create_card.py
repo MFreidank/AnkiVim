@@ -58,7 +58,7 @@ def has_no_user_input(filename, header):
 def create_card(deckpath):
     if not os.path.exists(deckpath):
         call(['mkdir', "-p", deckpath])
-    headers = "{0}{1}{2}{1}".format(draw_frame('QUESTION'), '\n \n \n',
+    headers = "{0}{1}{2}{1}".format(draw_frame('QUESTION'), '\n\n\n',
                                     draw_frame('ANSWER\t'))
     with tempfile.NamedTemporaryFile(suffix='.anki_vim') as temp_file:
         write_file(temp_file, headers)
@@ -70,7 +70,10 @@ def create_card(deckpath):
         # Call vim, set the cursor below the "FRONT" header,
         # allow snippets for our new filetype, set the syntax highlighting
         # so that it supports latex highlighting.
-        call(['vim', '+9', '-c set filetype=anki_vim', '-c set syntax=tex',
+        pattern = r'/\v\%\n\zs(^$|^[^\%]{1}.*$)'
+        call(['vim', '-c {0}'.format(pattern),
+              '-c set filetype=anki_vim',
+              '-c set syntax=tex',
               temp_file.name])
         if has_no_user_input(temp_file.name, headers):
             return False
