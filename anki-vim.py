@@ -64,7 +64,7 @@ Using VIM to generate textfiles which are directly anki-importable."""
             return 1
 
     deck = options.deck
-    deckpath = os.path.abspath("./decks")+"/"+deck
+    deckpath = os.path.abspath("./decks") + "/" + deck
 
     content_added = True
     while content_added:
