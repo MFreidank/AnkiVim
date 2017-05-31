@@ -27,7 +27,7 @@ Generating Anki Cards
 4. editor starts right back up to generate a new card for the same deck => Iterate 2.-4. until all cards are generated.
 
 5. to stop the card creation process, simply close your editor ( for vim: ":q" or ":q!", for additional information see
-   `this book<https://www.amazon.com/How-Exit-Vim-Chris-Worfolk-ebook/dp/B01N5M1U6W>`_)
+   `this book<https://www.amazon.com/How-Exit-Vim-Chris-Worfolk-ebook/dp/B01N5M1U6W>_`)
 
 Importing into Anki
 =====================
