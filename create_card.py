@@ -1,6 +1,6 @@
 """
 Present user-friendly interface to write Anki-cards in VIM, importable into
-anki as text files.
+anki(1) as text files.
 """
 import os
 from subprocess import call
@@ -15,10 +15,22 @@ else:
     def write_file(file_handle, string):
         file_handle.write(string)
 
-python_three = sys.version_info.major == 3
-
 
 def draw_frame(content):
+    """ Construct a string which is a rectangular frame consisting
+        of '%' markers with `content` written inside this frame.
+
+    Parameters
+    ----------
+    content : string
+
+    Text to write inside the frame.
+
+    Returns
+    -------
+    frame: string
+
+    """
     center = '%\t\t\t' + content + '\t\t'
     delim_header = '%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%'
     delim_border = "{0}{1}{2}{0}".format('\n%\t\t\t\t\t\t%\n%\t\t\t\t\t\t%\n',
@@ -27,10 +39,29 @@ def draw_frame(content):
 
 
 class HeaderNotIntactError(ValueError):
-    """ QUESTION/ANSWER header was not left intact."""
+    """ QUESTION/ANSWER header was modified by the user, which breaks parsing."""
 
 
 def get_qa(contents_file):
+    """ Read front (question) and back (answer) of a new anki card from
+        `contents_file`.
+
+    Parameters
+    ----------
+    contents_file : filestream
+
+    Returns
+    -------
+    (question, answer): (string, string) 2-tuple
+
+    User-input for `question` and `answer` for the new card.
+
+    Raises
+    -------
+    `HeaderNotIntactError` if user has modified the QUESTION/ANSWER headers
+    that serve as markers during parsing.
+
+    """
     question = ''
     answer = ''
     header_lines = 0
@@ -51,11 +82,43 @@ def get_qa(contents_file):
 
 
 def has_no_user_input(filename, header):
+    """ Checks if `filename` contains no user input, i.e. if it consists only of `header`.
+
+    Parameters
+    ----------
+    filename : string
+    Full path to file that may or may not contain new user input.
+
+    header : string
+    Header used to mark QUESTION and ANSWER part of the user input in
+    `filename`.
+
+    Returns
+    -------
+    has_no_user_input: boolean
+
+    `True` if no input except for the preadded `header` was found in
+    `filename`, `False` otherwise
+
+    """
+
     with open(filename, 'r') as contents_file:
         return contents_file.read() == header
 
 
 def create_card(deckpath):
+    """ Create a new anki-card in deck at path `deckpath`, by appending
+        new formatted content to deckpath/raw_cards.txt.
+
+        Will create a new deck directory at `deckpath` if there is none yet.
+
+    Parameters
+    ----------
+    deckpath : string
+    Full path to a folder containing raw textual data that can be imported
+    into anki(1) directly.
+
+    """
     if not os.path.exists(deckpath):
         call(['mkdir', "-p", deckpath])
     headers = "{0}{1}{2}{1}".format(draw_frame('QUESTION'), '\n\n\n',
