@@ -45,9 +45,7 @@ def main():
     args = parser.parse_args()
 
     if args.editor is not None and args.editor_args is None:
-        raise ValueError(
-
-        )
+        raise ValueError()
 
     if args.editor is None:
         editor = getenv("EDITOR", "vim")
