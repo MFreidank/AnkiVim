@@ -2,9 +2,8 @@
 AnkiVim
 ==================
 |Build Status|
-|Coverage_|
 |Health_|
-
+|Coverage_|
 
 
 Overview
@@ -15,6 +14,11 @@ Use vim to rapidly write textfiles immediately importable into anki(1).
 Requirements
 ============
 * Python >= 2.7 or Python >= 3.4
+
+Installation
+============
+
+    pip3 install AnkiVim
 
 
 Generating Anki Cards
