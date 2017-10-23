@@ -1,6 +1,9 @@
 ==================
 VimForAnki
 ==================
+|Build Status|
+
+
 
 Overview
 ========
@@ -50,3 +53,6 @@ Supports:
 =========
 * Latex commands of any kind
 * html tags of any kind (images can be included this way as well)
+
+.. |Build Status| image:: https://travis-ci.org/MFreidank/AnkiVim.svg?branch=master
+   :target: https://travis-ci.org/MFreidank/pysgmcmc
