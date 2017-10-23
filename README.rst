@@ -15,13 +15,6 @@ Requirements
 ============
 * Python >= 2.7 or Python >= 3.4
 
-Installation
-============
-Simply do::
-
-    pip install AnkiVim
-
-
 Generating Anki Cards
 =====================
 
