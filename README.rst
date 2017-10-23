@@ -17,7 +17,7 @@ Requirements
 
 Installation
 ============
-
+Simply do::
     pip3 install AnkiVim
 
 
