@@ -18,7 +18,8 @@ Requirements
 Installation
 ============
 Simply do::
-    pip3 install AnkiVim
+
+    pip install AnkiVim
 
 
 Generating Anki Cards
