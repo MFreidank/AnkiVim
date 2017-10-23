@@ -1,7 +1,8 @@
 ==================
-VimForAnki
+AnkiVim
 ==================
 |Build Status|
+|Coverage_|
 
 
 
@@ -55,4 +56,8 @@ Supports:
 * html tags of any kind (images can be included this way as well)
 
 .. |Build Status| image:: https://travis-ci.org/MFreidank/AnkiVim.svg?branch=master
-   :target: https://travis-ci.org/MFreidank/pysgmcmc
+   :target: https://travis-ci.org/MFreidank/AnkiVim
+
+.. |Coverage_| image:: https://coveralls.io/repos/github/MFreidank/AnkiVim/badge.svg
+   :target: https://coveralls.io/github/MFreidank/AnkiVim
+   :alt: Coverage
