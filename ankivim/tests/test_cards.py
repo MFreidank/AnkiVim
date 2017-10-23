@@ -1,5 +1,10 @@
-from ankivim.cards import draw_frame, editor_command
+import pytest
+from os.path import join as path_join, dirname
+
+from ankivim.cards import draw_frame, editor_command, parse_qa
 from ankivim.errors import HeaderNotIntactError
+
+DATA_PATH = path_join(dirname(__file__), "data")
 
 
 def test_draw_frame():
@@ -54,4 +59,15 @@ def test_emacs_args():
     assert cmd == ("emacs", "-nw", filename)
 
 
-# XXX: Test parsing qa
+def test_parse_qa_valid():
+    contents_filename = path_join(DATA_PATH, "test_contents_parse_qa.txt")
+    with open(contents_filename, "r") as f:
+        contents = f.read()
+    question, answer = parse_qa(contents)
+    assert question == "testquestionline1<br />testquestionline2<br /><br />"
+    assert answer == "<br />testanswerline1<br />testanswerline2<br />"
+
+
+def test_parse_qa_headers_not_intact():
+    with pytest.raises(HeaderNotIntactError):
+        parse_qa("")

@@ -24,7 +24,6 @@ draw_frame = """%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 """.format
 
 
-# XXX Test (which can be done since "contents" is a string)
 def parse_qa(contents):
     """ Read front (question) and back (answer) of a new anki card from
         `contents_file`.
@@ -44,6 +43,7 @@ def parse_qa(contents):
     that serve as markers during parsing.
 
     """
+
     question, answer = [], []
     header_lines = 0
 
@@ -57,11 +57,11 @@ def parse_qa(contents):
 
     if header_lines < 8:
         raise HeaderNotIntactError(
-            "You deleted header lines!"
+            "You deleted header lines! "
             "The QUESTION and ANSWER markers must be kept intact, "
             "otherwise parsing fails."
         )
-    return "".join(question), "".join(answer)
+    return "<br />".join(question), "<br />".join(answer)
 
 
 def editor_command(filename,
