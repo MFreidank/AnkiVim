@@ -38,7 +38,8 @@ def test_editor_command_empty_args():
             editor=editor, editor_args=editor_args, filename=filename
         )
 
-        assert cmd == (editor, *editor_args, filename)
+        expected_cmd = (editor, *editor_args, filename)
+        assert cmd == expected_cmd
 
 
 def test_emacs_args():
