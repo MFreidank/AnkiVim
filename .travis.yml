@@ -1,0 +1,20 @@
+language: python
+python:
+    - "3.5"
+    - "3.4"
+    - "2.7"
+
+os:
+    - linux
+
+install:
+  - pip install --upgrade pip
+  - pip install pytest-cov
+  - python setup.py install
+  - pip install coveralls 
+
+script: 
+    - pytest --cov=ankivim
+
+after_success:
+    - coveralls
