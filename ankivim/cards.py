@@ -99,7 +99,8 @@ def editor_command(filename,
         Tuple that contains full call to `editor` with `editor_args`
         to open `filename`. Can directly be passed to `subprocess.call`.
     """
-    return (editor, *editor_args, filename)
+
+    return tuple([editor] + editor_args + [filename])
 
 
 def open_editor(filename,
