@@ -2,6 +2,7 @@
 AnkiVim
 ==================
 |Build Status|
+|Coverage_|
 
 
 
@@ -56,3 +57,7 @@ Supports:
 
 .. |Build Status| image:: https://travis-ci.org/MFreidank/AnkiVim.svg?branch=master
    :target: https://travis-ci.org/MFreidank/AnkiVim
+
+.. |Coverage_| image:: https://coveralls.io/repos/github/MFreidank/AnkiVim/badge.svg
+   :target: https://coveralls.io/github/MFreidank/AnkiVim
+   :alt: Coverage
