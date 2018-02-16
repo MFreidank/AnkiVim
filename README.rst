@@ -4,6 +4,7 @@ AnkiVim
 |Build Status|
 |Health_|
 |Coverage_|
+|Pypi_|
 
 
 Overview
