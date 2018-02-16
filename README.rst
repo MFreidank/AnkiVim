@@ -21,6 +21,7 @@ Installation
 Simply run:
 
 .. code-block:: python
+
     python setup.py install
 
 Generating Anki Cards
@@ -29,6 +30,7 @@ Generating Anki Cards
 1. Call: 
 
 .. code-block:: python
+
     python script/anki-vim.py DECKNAME
 
 2. vim starts with a preformatted card.
