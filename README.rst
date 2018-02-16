@@ -20,9 +20,9 @@ Installation
 
 Simply run:
 
-```
+``
 python setup.py install
-```
+``
 
 Generating Anki Cards
 =====================
