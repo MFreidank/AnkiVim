@@ -88,3 +88,6 @@ Supports:
 .. |Health_| image:: https://api.codacy.com/project/badge/Grade/d0d6624881c0415fb72999e355741e2b    
    :target: https://www.codacy.com/app/MFreidank/AnkiVim?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=MFreidank/AnkiVim&amp;utm_campaign=Badge_Grade
    :alt: Health
+
+.. |Pypi_| image:: https://badge.fury.io/py/AnkiVim.svg
+    :target: https://badge.fury.io/py/AnkiVim
