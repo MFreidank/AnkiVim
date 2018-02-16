@@ -18,7 +18,7 @@ Requirements
 Generating Anki Cards
 =====================
 
-1. Call: python anki-vim.py DECKNAME
+1. Call: `python script/anki-vim.py` DECKNAME
 
 2. vim starts with a preformatted card.
    Start typing the front part of the anki card below "QUESTION", then fill out 
