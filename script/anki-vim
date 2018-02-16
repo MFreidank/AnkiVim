@@ -5,7 +5,7 @@
 # vim: tabstop=8 expandtab shiftwidth=4 softtabstop=4
 import argparse
 from os import getenv
-from os.path import abspath, join as path_join
+from os.path import join as path_join, expanduser
 
 from ankivim.cards import create_card
 
@@ -19,6 +19,12 @@ def main():
 
     parser.add_argument(
         "deck", help='Name of the deck to write cards for.'
+    )
+
+    parser.add_argument(
+        "--deckpath",
+        help="Custom location for this deck (instead of `$HOME/.ankvim/decks/DECKNAME`)",
+        default=None,
     )
 
     parser.add_argument(
@@ -68,14 +74,11 @@ def main():
         else:
             editor_args = args.editor_args.split(",")
 
-    deckpath = path_join(abspath("./decks"), args.deck)
+    deckpath = args.deckpath or path_join(expanduser("~"), "/.ankivim/decks", args.deck)
 
-    content_added = True
-    while content_added:
+    while create_card(deckpath=deckpath, editor=editor, editor_args=editor_args):
         # If a card is closed without content or changes, stop
-        content_added = create_card(
-            deckpath=deckpath, editor=editor, editor_args=editor_args
-        )
+        pass
 
 
 if __name__ == '__main__':
