@@ -29,7 +29,7 @@ You can verify that this step succeeded and see available options by running:
 
 .. code-block:: python
 
-    anki-vim --help
+    anki-vim -h
 
 
 Generating Anki Cards
