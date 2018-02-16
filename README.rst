@@ -15,6 +15,15 @@ Requirements
 ============
 * Python >= 2.7 or Python >= 3.4
 
+Installation
+============
+
+Simply run:
+
+```
+python setup.py install
+```
+
 Generating Anki Cards
 =====================
 
@@ -25,7 +34,10 @@ Generating Anki Cards
    the back below "ANSWER". 
    (*NOTE*: It is important to leave the QUESTION and ANSWER headers intact throughout)
 
-3. save the file and exit the editor. (vim: ":wq") => the card contents are saved to decks/DECKNAME/raw_cards.txt
+3. save the file and exit the editor. (vim: ":wq") => the card contents are saved to: 
+   `$HOME/.ankivim/decks/DECKNAME/raw_cards.txt`.
+   (alternatively, you can specify a custom location for your decks using 
+   the `--deckpath` option of `script/anki-vim.py`.)
 
 4. editor starts right back up to generate a new card for the same deck => Iterate 2.-4. until all cards are generated.
 
