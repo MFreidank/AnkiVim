@@ -74,7 +74,7 @@ def main():
         else:
             editor_args = args.editor_args.split(",")
 
-    deckpath = args.deckpath or path_join(expanduser("~"), "ankivim/decks", args.deck)
+    deckpath = args.deckpath or path_join(expanduser("~"), ".ankivim/decks", args.deck)
 
     while create_card(deckpath=deckpath, editor=editor, editor_args=editor_args):
         # If a card is closed without content or changes, stop
