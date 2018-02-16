@@ -24,6 +24,14 @@ Simply run:
 
     python setup.py install
 
+
+You can verify that this step succeeded and see available options by running:
+
+.. code-block:: python
+
+    anki-vim --help
+
+
 Generating Anki Cards
 =====================
 
@@ -31,7 +39,7 @@ Generating Anki Cards
 
 .. code-block:: python
 
-    python script/anki-vim.py DECKNAME
+    anki-vim DECKNAME
 
 2. vim starts with a preformatted card.
    Start typing the front part of the anki card below "QUESTION", then fill out 
