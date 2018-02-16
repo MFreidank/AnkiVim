@@ -5,7 +5,7 @@
 # vim: tabstop=8 expandtab shiftwidth=4 softtabstop=4
 import argparse
 from os import getenv
-from os.path import abspath, join as path_join, expanduser
+from os.path import join as path_join, expanduser
 
 from ankivim.cards import create_card
 
