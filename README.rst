@@ -22,7 +22,7 @@ Simply run:
 
 .. code-block:: python
 
-    python setup.py install
+    pip install AnkiVim
 
 
 You can verify that this step succeeded and see available options by running:
