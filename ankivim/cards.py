@@ -80,10 +80,7 @@ def editor_command(filename,
                        # load anki-vim snippets for this buffer
                        '-c let b:UltiSnipsSnippetDirectories=["UltiSnips", "{snippet_directory}"]'.format(
                            snippet_directory=abspath(path_join(
-                               ankivim.__path__[0],
-                               "..",
-                               "AnkiVim_snippets",
-                               "UltiSnips",))),),):
+                               ankivim.__path__[0], "UltiSnips",))),),):
     """
     Open `filename` using `editor` which is called with arguments
     `editor_args`.
@@ -125,10 +122,7 @@ def open_editor(filename,
                     # load anki-vim snippets for this buffer
                     '-c let b:UltiSnipsSnippetDirectories=["UltiSnips", "{snippet_directory}"]'.format(
                         snippet_directory=abspath(path_join(
-                            ankivim.__path__[0],
-                            "..",
-                            "AnkiVim_snippets",
-                            "UltiSnips",))),),):
+                            ankivim.__path__[0], "UltiSnips",))),),):
     """
     Open `filename` using `editor` which is called with arguments
     `editor_args`.
@@ -173,10 +167,7 @@ def create_card(deckpath, editor=getenv("EDITOR", "vim"),
                     # load anki-vim snippets for this buffer
                     '-c let b:UltiSnipsSnippetDirectories=["UltiSnips", "{snippet_directory}"]'.format(
                         snippet_directory=abspath(path_join(
-                            ankivim.__path__[0],
-                            "..",
-                            "AnkiVim_snippets",
-                            "UltiSnips",))),),):
+                            ankivim.__path__[0], "UltiSnips",))),),):
     """
     Create a new anki-card in deck at path `deckpath`, by appending new
     formatted content to deckpath/raw_cards.txt.

@@ -2,3 +2,4 @@ include LICENSE
 include README.rst
 include *.md *.rst
 recursive-include docs *
+include UltiSnips/anki_vim.snippets

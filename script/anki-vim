@@ -71,10 +71,7 @@ def main():
             # load anki-vim snippets for this buffer
             '-c let b:UltiSnipsSnippetDirectories=["UltiSnips", "{snippet_directory}"]'.format(
                 snippet_directory=abspath(path_join(
-                    ankivim.__path__[0],
-                    "..",
-                    "AnkiVim_snippets",
-                    "UltiSnips",))),
+                    ankivim.__path__[0], "UltiSnips",))),
         )
     else:
         if args.editor_args == "":

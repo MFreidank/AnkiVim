@@ -4,7 +4,7 @@ from setuptools import setup, find_packages
 with open("README.rst", "r") as f:
     long_description = f.read()
 
-VERSION = "1.5"
+VERSION = "1.5.1"
 
 
 setup(name="AnkiVim",
@@ -22,5 +22,7 @@ setup(name="AnkiVim",
       packages=find_packages(exclude=("tests", "tests.*")),
       include_package_data=True,
       zip_safe=False,
-      data_files=[("AnkiVim_snippets/UltiSnips/", ["./UltiSnips/anki_vim.snippets"])],
+      package=["ankivim"],
+      package_dir={"ankivim": "ankivim"},
+      package_data={"ankivim": ["UltiSnips/anki_vim.snippets", ]},
       )
