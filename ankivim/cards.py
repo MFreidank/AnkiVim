@@ -147,7 +147,6 @@ def open_editor(filename,
         Defaults to a suggested sequence of default arguments for vim(1).
 
     """
-    print("EDITOR_ARGS", editor_args)
     call_command = editor_command(filename, editor, editor_args)
     try:
         check_call(call_command)
@@ -199,7 +198,6 @@ def create_card(deckpath, editor=getenv("EDITOR", "vim"),
         Defaults to a suggested sequence of default arguments for vim(1).
 
     """
-    print("EDITORARGSmain", editor_args)
 
     if not path_exists(deckpath):
         makedirs(deckpath)
