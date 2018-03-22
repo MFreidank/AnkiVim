@@ -3,10 +3,12 @@ Present user-friendly interface to write Anki-cards in VIM, importable into
 anki(1) as text files.
 """
 from os import makedirs, getenv
-from os.path import exists as path_exists, join as path_join
+from os.path import abspath, exists as path_exists, join as path_join
 from subprocess import check_call, CalledProcessError
 import sys
 import tempfile
+
+import ankivim
 from ankivim.errors import HeaderNotIntactError
 
 # for python2+3 compatibility in file writing
@@ -74,8 +76,14 @@ def editor_command(filename,
                        # use anki_vim snippets
                        "-c set filetype=anki_vim",
                        # latex syntax highlighting
-                       "-c set syntax=tex"
-                   )):
+                       "-c set syntax=tex",
+                       # load anki-vim snippets for this buffer
+                       '-c let b:UltiSnipsSnippetDirectories=["UltiSnips", "{snippet_directory}"]'.format(
+                           snippet_directory=abspath(path_join(
+                               ankivim.__path__[0],
+                               "..",
+                               "AnkiVim_snippets",
+                               "UltiSnips",))),),):
     """
     Open `filename` using `editor` which is called with arguments
     `editor_args`.
@@ -113,8 +121,14 @@ def open_editor(filename,
                     # use anki_vim snippets
                     "-c set filetype=anki_vim",
                     # latex syntax highlighting
-                    "-c set syntax=tex"
-                )):
+                    "-c set syntax=tex",
+                    # load anki-vim snippets for this buffer
+                    '-c let b:UltiSnipsSnippetDirectories=["UltiSnips", "{snippet_directory}"]'.format(
+                        snippet_directory=abspath(path_join(
+                            ankivim.__path__[0],
+                            "..",
+                            "AnkiVim_snippets",
+                            "UltiSnips",))),),):
     """
     Open `filename` using `editor` which is called with arguments
     `editor_args`.
@@ -133,6 +147,7 @@ def open_editor(filename,
         Defaults to a suggested sequence of default arguments for vim(1).
 
     """
+    print("EDITOR_ARGS", editor_args)
     call_command = editor_command(filename, editor, editor_args)
     try:
         check_call(call_command)
@@ -155,7 +170,14 @@ def create_card(deckpath, editor=getenv("EDITOR", "vim"),
                     # use anki_vim snippets
                     "-c set filetype=anki_vim",
                     # latex syntax highlighting
-                    "-c set syntax=tex")):
+                    "-c set syntax=tex",
+                    # load anki-vim snippets for this buffer
+                    '-c let b:UltiSnipsSnippetDirectories=["UltiSnips", "{snippet_directory}"]'.format(
+                        snippet_directory=abspath(path_join(
+                            ankivim.__path__[0],
+                            "..",
+                            "AnkiVim_snippets",
+                            "UltiSnips",))),),):
     """
     Create a new anki-card in deck at path `deckpath`, by appending new
     formatted content to deckpath/raw_cards.txt.
@@ -177,6 +199,7 @@ def create_card(deckpath, editor=getenv("EDITOR", "vim"),
         Defaults to a suggested sequence of default arguments for vim(1).
 
     """
+    print("EDITORARGSmain", editor_args)
 
     if not path_exists(deckpath):
         makedirs(deckpath)

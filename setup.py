@@ -22,4 +22,5 @@ setup(name="AnkiVim",
       packages=find_packages(exclude=("tests", "tests.*")),
       include_package_data=True,
       zip_safe=False,
+      data_files=[("AnkiVim_snippets/UltiSnips/", ["./UltiSnips/anki_vim.snippets"])],
       )

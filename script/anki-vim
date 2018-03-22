@@ -5,8 +5,9 @@
 # vim: tabstop=8 expandtab shiftwidth=4 softtabstop=4
 import argparse
 from os import getenv
-from os.path import join as path_join, expanduser
+from os.path import join as path_join, expanduser, abspath
 
+import ankivim
 from ankivim.cards import create_card
 
 
@@ -66,7 +67,14 @@ def main():
             # use anki_vim snippets
             "-c set filetype=anki_vim",
             # latex syntax highlighting
-            "-c set syntax=tex"
+            "-c set syntax=tex",
+            # load anki-vim snippets for this buffer
+            '-c let b:UltiSnipsSnippetDirectories=["UltiSnips", "{snippet_directory}"]'.format(
+                snippet_directory=abspath(path_join(
+                    ankivim.__path__[0],
+                    "..",
+                    "AnkiVim_snippets",
+                    "UltiSnips",))),
         )
     else:
         if args.editor_args == "":
