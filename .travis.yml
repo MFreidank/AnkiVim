@@ -9,7 +9,8 @@ os:
 
 install:
   - pip install --upgrade pip
-  - pip install pytest pytest-cov
+  - pip install pytest 
+  - pip install pytest-cov<2.6.0
   - python setup.py install
   - pip install coveralls 
 
