@@ -41,9 +41,7 @@ def main():
 
     parser.add_argument(
         "--editor-args",
-        help="Arguments to pass to the editor upon calling. "
-             "Must be specified (simplest case: empty string) when '--editor' "
-             "is set.\n"
+        help="Arguments to pass to the editor upon calling.\n"
              'Expected format:"--arg1 VALUE1 --arg2 VALUE2 ..."\t\n'
              "(mind the quotes!)",
         action="store", dest="editor_args", default=None
@@ -51,30 +49,31 @@ def main():
 
     args = parser.parse_args()
 
-    if args.editor is not None and args.editor_args is None:
-        raise ValueError()
-
     if args.editor is None:
         editor = getenv("EDITOR", "vim")
     else:
         editor = args.editor
 
-    if args.editor_args is None:
-        # editor args below target vim 7.4, overwrite for other editor choices.
-        editor_args = (
-            # set cursor below headers
-            "-c {}".format(r'/\v\%\n\zs(^$|^[^\%]{1}.*$)'),
-            # use anki_vim snippets
-            "-c set filetype=anki_vim",
-            # latex syntax highlighting
-            "-c set syntax=tex",
-            # load anki-vim snippets for this buffer
-            '-c let b:UltiSnipsSnippetDirectories=["UltiSnips", "{snippet_directory}"]'.format(
-                snippet_directory=abspath(path_join(
-                    ankivim.__path__[0], "UltiSnips",))),
-        )
+    if editor in ("vim", "nvim", "neovim"):
+        # for various vim flavors, have default editor args ready to use.
+        if not args.editor_args:
+            # editor args below target vim 7.4, overwrite for other editor choices.
+            editor_args = (
+                # set cursor below headers
+                "-c {}".format(r'/\v\%\n\zs(^$|^[^\%]{1}.*$)'),
+                # use anki_vim snippets
+                "-c set filetype=anki_vim",
+                # latex syntax highlighting
+                "-c set syntax=tex",
+                # load anki-vim snippets for this buffer
+                '-c let b:UltiSnipsSnippetDirectories=["UltiSnips", "{snippet_directory}"]'.format(
+                    snippet_directory=abspath(path_join(
+                        ankivim.__path__[0], "UltiSnips",))),
+            )
+        else:
+            editor_args = args.editor_args.split(",")
     else:
-        if args.editor_args == "":
+        if not args.editor_args:
             editor_args = ()
         else:
             editor_args = args.editor_args.split(",")
