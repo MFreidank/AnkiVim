@@ -4,7 +4,7 @@ from setuptools import setup, find_packages
 with open("README.rst", "r") as f:
     long_description = f.read()
 
-VERSION = "1.5.2"
+VERSION = "1.5.3"
 
 
 setup(name="AnkiVim",
