@@ -13,9 +13,13 @@ from ankivim.errors import HeaderNotIntactError
 
 # for python2+3 compatibility in file writing
 if sys.version_info.major == 3:
+
     def write_file(file_handle, string):
         file_handle.write(string.encode("utf-8"))
+
+
 else:
+
     def write_file(file_handle, string):
         file_handle.write(string)
 
@@ -27,7 +31,7 @@ draw_frame = """%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
 def parse_qa(contents):
-    """ Read front (question) and back (answer) of a new anki card from
+    """Read front (question) and back (answer) of a new anki card from
         `contents_file`.
 
     Parameters
@@ -53,9 +57,9 @@ def parse_qa(contents):
         if line.startswith("%"):
             header_lines += 1
         elif 0 < header_lines < 15:
-            question.append(line.replace('\n', "<br />"))
+            question.append(line.replace("\n", "<br />"))
         elif header_lines > 8:
-            answer.append(line.replace('\n', "<br />"))
+            answer.append(line.replace("\n", "<br />"))
 
     if header_lines < 8:
         raise HeaderNotIntactError(
@@ -66,21 +70,29 @@ def parse_qa(contents):
     return "<br />".join(question), "<br />".join(answer)
 
 
-def editor_command(filename,
-                   editor=getenv("EDITOR", "vim"),
-                   # editor args below target vim 7.4, overwrite for other
-                   # editor choices.
-                   editor_args=(
-                       # set cursor below headers
-                       "-c {}".format(r'/\v\%\n\zs(^$|^[^\%]{1}.*$)'),
-                       # use anki_vim snippets
-                       "-c set filetype=anki_vim",
-                       # latex syntax highlighting
-                       "-c set syntax=tex",
-                       # load anki-vim snippets for this buffer
-                       '-c let b:UltiSnipsSnippetDirectories=["UltiSnips", "{snippet_directory}"]'.format(
-                           snippet_directory=abspath(path_join(
-                               ankivim.__path__[0], "UltiSnips",))),),):
+def editor_command(
+    filename,
+    editor=getenv("EDITOR", "vim"),
+    # editor args below target vim 7.4, overwrite for other
+    # editor choices.
+    editor_args=(
+        # set cursor below headers
+        "-c {}".format(r"/\v\%\n\zs(^$|^[^\%]{1}.*$)"),
+        # use anki_vim snippets
+        "-c set filetype=anki_vim",
+        # latex syntax highlighting
+        "-c set syntax=tex",
+        # load anki-vim snippets for this buffer
+        '-c let b:UltiSnipsSnippetDirectories=["UltiSnips", "{snippet_directory}"]'.format(
+            snippet_directory=abspath(
+                path_join(
+                    ankivim.__path__[0],
+                    "UltiSnips",
+                )
+            )
+        ),
+    ),
+):
     """
     Open `filename` using `editor` which is called with arguments
     `editor_args`.
@@ -108,21 +120,29 @@ def editor_command(filename,
     return tuple([editor] + list(editor_args) + [filename])
 
 
-def open_editor(filename,
-                editor=getenv("EDITOR", "vim"),
-                # editor args below target vim 7.4, overwrite for other
-                # editor choices.
-                editor_args=(
-                    # set cursor below headers
-                    "-c {}".format(r'/\v\%\n\zs(^$|^[^\%]{1}.*$)'),
-                    # use anki_vim snippets
-                    "-c set filetype=anki_vim",
-                    # latex syntax highlighting
-                    "-c set syntax=tex",
-                    # load anki-vim snippets for this buffer
-                    '-c let b:UltiSnipsSnippetDirectories=["UltiSnips", "{snippet_directory}"]'.format(
-                        snippet_directory=abspath(path_join(
-                            ankivim.__path__[0], "UltiSnips",))),),):
+def open_editor(
+    filename,
+    editor=getenv("EDITOR", "vim"),
+    # editor args below target vim 7.4, overwrite for other
+    # editor choices.
+    editor_args=(
+        # set cursor below headers
+        "-c {}".format(r"/\v\%\n\zs(^$|^[^\%]{1}.*$)"),
+        # use anki_vim snippets
+        "-c set filetype=anki_vim",
+        # latex syntax highlighting
+        "-c set syntax=tex",
+        # load anki-vim snippets for this buffer
+        '-c let b:UltiSnipsSnippetDirectories=["UltiSnips", "{snippet_directory}"]'.format(
+            snippet_directory=abspath(
+                path_join(
+                    ankivim.__path__[0],
+                    "UltiSnips",
+                )
+            )
+        ),
+    ),
+):
     """
     Open `filename` using `editor` which is called with arguments
     `editor_args`.
@@ -147,27 +167,34 @@ def open_editor(filename,
     except CalledProcessError:
         raise ValueError(
             "Failed to call editor '{editor}' on filename '{filename}'.\n "
-            "Full call string was: {call}""".format(
-                editor=editor, filename=filename, call=" ".join(call_command)
-            )
-
+            "Full call string was: {call}"
+            "".format(editor=editor, filename=filename, call=" ".join(call_command))
         )
 
 
-def create_card(deckpath, editor=getenv("EDITOR", "vim"),
-                # editor args below target vim 7.4, overwrite for other
-                # editor choices.
-                editor_args=(
-                    # set cursor below headers
-                    "-c {}".format(r'/\v\%\n\zs(^$|^[^\%]{1}.*$)'),
-                    # use anki_vim snippets
-                    "-c set filetype=anki_vim",
-                    # latex syntax highlighting
-                    "-c set syntax=tex",
-                    # load anki-vim snippets for this buffer
-                    '-c let b:UltiSnipsSnippetDirectories=["UltiSnips", "{snippet_directory}"]'.format(
-                        snippet_directory=abspath(path_join(
-                            ankivim.__path__[0], "UltiSnips",))),),):
+def create_card(
+    deckpath,
+    editor=getenv("EDITOR", "vim"),
+    # editor args below target vim 7.4, overwrite for other
+    # editor choices.
+    editor_args=(
+        # set cursor below headers
+        "-c {}".format(r"/\v\%\n\zs(^$|^[^\%]{1}.*$)"),
+        # use anki_vim snippets
+        "-c set filetype=anki_vim",
+        # latex syntax highlighting
+        "-c set syntax=tex",
+        # load anki-vim snippets for this buffer
+        '-c let b:UltiSnipsSnippetDirectories=["UltiSnips", "{snippet_directory}"]'.format(
+            snippet_directory=abspath(
+                path_join(
+                    ankivim.__path__[0],
+                    "UltiSnips",
+                )
+            )
+        ),
+    ),
+):
     """
     Create a new anki-card in deck at path `deckpath`, by appending new
     formatted content to deckpath/raw_cards.txt.
@@ -199,7 +226,7 @@ def create_card(deckpath, editor=getenv("EDITOR", "vim"),
         space="\n\n\n",
     )
 
-    with tempfile.NamedTemporaryFile(suffix='.anki_vim') as temporary_file:
+    with tempfile.NamedTemporaryFile(suffix=".anki_vim") as temporary_file:
         write_file(temporary_file, qa_headers)
 
         # flush to ensure Q/A headers are already in the file when we
@@ -213,7 +240,7 @@ def create_card(deckpath, editor=getenv("EDITOR", "vim"),
             filename=temporary_file.name, editor=editor, editor_args=editor_args
         )
 
-        with open(temporary_file.name, 'r') as contents_file:
+        with open(temporary_file.name, "r") as contents_file:
             contents = contents_file.read()
 
     has_no_user_input = contents == qa_headers
