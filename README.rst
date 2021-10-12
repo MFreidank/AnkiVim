@@ -78,7 +78,7 @@ Supports:
 =========
 * Latex commands of any kind
 * html tags of any kind (images can be included this way as well)
-* uses snippets : allows for quick insertion of latex and cloze, for example cc<TAB> will add `{{c1::cloze}}`. For more see [here](https://github.com/MFreidank/AnkiVim/blob/master/ankivim/UltiSnips/anki_vim.snippets).
+* uses snippets : allows for quick insertion of latex and cloze, for example cc<TAB> will add `{{c1::cloze}}`. For more information, `click here <https://github.com/MFreidank/AnkiVim/blob/master/ankivim/UltiSnips/anki_vim.snippets>`_.
 
 .. |Build Status| image:: https://app.travis-ci.com/MFreidank/AnkiVim.svg?branch=master
    :target: https://app.travis-ci.com/github/MFreidank/AnkiVim
