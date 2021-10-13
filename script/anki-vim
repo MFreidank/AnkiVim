@@ -14,13 +14,11 @@ from ankivim.cards import create_card
 def main():
     parser = argparse.ArgumentParser(
         description="Use VIM (or the editor of your choice) "
-                    "to comfortably and quickly write textfiles "
-                    "which are directly anki-importable. "
+        "to comfortably and quickly write textfiles "
+        "which are directly anki-importable. "
     )
 
-    parser.add_argument(
-        "deck", help='Name of the deck to write cards for.'
-    )
+    parser.add_argument("deck", help="Name of the deck to write cards for.")
 
     parser.add_argument(
         "--deckpath",
@@ -29,22 +27,41 @@ def main():
     )
 
     parser.add_argument(
-        "-e", "--editor",
+        "-e",
+        "--editor",
         help="Force using EDITOR, overwriting default behaviours.\n"
-             "If set to anything else but vim(1), '--editor-args' must "
-             "also be specified.\n"
-             "Default behaviour for editor choices:\n"
-             "1. read environment variable $EDITOR \n"
-             "2. fall back to vim(1) if $EDITOR is not set.",
-        action="store", dest="editor", default=None
+        "If set to anything else but vim(1), '--editor-args' must "
+        "also be specified.\n"
+        "Default behaviour for editor choices:\n"
+        "1. read environment variable $EDITOR \n"
+        "2. fall back to vim(1) if $EDITOR is not set.",
+        action="store",
+        dest="editor",
+        default=None,
     )
 
     parser.add_argument(
         "--editor-args",
         help="Arguments to pass to the editor upon calling.\n"
-             'Expected format:"--arg1 VALUE1 --arg2 VALUE2 ..."\t\n'
-             "(mind the quotes!)",
-        action="store", dest="editor_args", default=None
+        'Expected format:"--arg1 VALUE1 --arg2 VALUE2 ..."\t\n'
+        "(mind the quotes!)",
+        action="store",
+        dest="editor_args",
+        default=None,
+    )
+
+    parser.add_argument(
+        "-q",
+        "--question-header",
+        help="Question header to use.",
+        default="QUESTION",
+    )
+
+    parser.add_argument(
+        "-a",
+        "--answer-header",
+        help="Answer header to use.",
+        default="ANSWER\t",
     )
 
     args = parser.parse_args()
@@ -60,15 +77,20 @@ def main():
             # editor args below target vim 7.4, overwrite for other editor choices.
             editor_args = (
                 # set cursor below headers
-                "-c {}".format(r'/\v\%\n\zs(^$|^[^\%]{1}.*$)'),
+                "-c {}".format(r"/\v\%\n\zs(^$|^[^\%]{1}.*$)"),
                 # use anki_vim snippets
                 "-c set filetype=anki_vim",
                 # latex syntax highlighting
                 "-c set syntax=tex",
                 # load anki-vim snippets for this buffer
                 '-c let b:UltiSnipsSnippetDirectories=["UltiSnips", "{snippet_directory}"]'.format(
-                    snippet_directory=abspath(path_join(
-                        ankivim.__path__[0], "UltiSnips",))),
+                    snippet_directory=abspath(
+                        path_join(
+                            ankivim.__path__[0],
+                            "UltiSnips",
+                        )
+                    )
+                ),
             )
         else:
             editor_args = args.editor_args.split(",")
@@ -80,10 +102,16 @@ def main():
 
     deckpath = args.deckpath or path_join(expanduser("~"), ".ankivim/decks", args.deck)
 
-    while create_card(deckpath=deckpath, editor=editor, editor_args=editor_args):
+    while create_card(
+        deckpath=deckpath,
+        editor=editor,
+        editor_args=editor_args,
+        question_header=args.question_header,
+        answer_header=args.answer_header,
+    ):
         # If a card is closed without content or changes, stop
         pass
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()

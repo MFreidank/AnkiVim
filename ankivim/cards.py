@@ -194,6 +194,8 @@ def create_card(
             )
         ),
     ),
+    question_header="QUESTION",
+    answer_header="ANSWER\t",
 ):
     """
     Create a new anki-card in deck at path `deckpath`, by appending new
@@ -214,15 +216,22 @@ def create_card(
     editor_args : tuple, optional
         Additional arguments to pass to `editor` upon calling.
         Defaults to a suggested sequence of default arguments for vim(1).
-
+    question_header : string, optional
+        Header to use for the front/question component of generated cards.
+        Can be overwritten for ease of support of different card types, e.g. cloze-deletion.
+        Defaults to string `"QUESTION"`.
+    answer_header : string, optional
+        Header to use for the back/answer component of generated cards.
+        Can be overwritten for ease of support of different card types, e.g. cloze-deletion.
+        Defaults to string `"ANSWER\t"`.
     """
 
     if not path_exists(deckpath):
         makedirs(deckpath)
 
     qa_headers = "{question}{space}{answer}{space}".format(
-        question=draw_frame(content="QUESTION"),
-        answer=draw_frame(content="ANSWER\t"),
+        question=draw_frame(content=question_header),
+        answer=draw_frame(content=answer_header),
         space="\n\n\n",
     )
 
